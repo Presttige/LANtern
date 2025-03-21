@@ -43,4 +43,6 @@ cd ~/Documents
 git clone https://github.com/yourusername/lantern.git
 cd lantern
 
-2. Create and activate a virtual environment
+### 2. Create and activate a virtual environment
+python3 -m venv venv
+source venv/bin/activate
