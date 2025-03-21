@@ -36,13 +36,33 @@ Wake on lan from web interface
 
 ## 🧰 Installation (Linux)
 
-### 1. Clone the project and navigate into it
+### 1. Install Python & required packages
 
-```bash
-cd ~/Documents
-git clone https://github.com/yourusername/lantern.git
-cd lantern
+sudo apt update
+sudo apt install python3 python3-venv python3-pip
 
-### 2. Create and activate a virtual environment
+
+### 2. Clone the project and set it up
+
+git clone https://github.com/presttige/LANtern.git
+cd LANtern
 python3 -m venv venv
 source venv/bin/activate
+pip install flask flask_sqlalchemy wakeonlan
+
+### 3. Run the app
+
+python app/main.py
+
+### 4. Access the interface
+
+On the host machine: http://localhost:4040
+From another device in the network: http://<your-pc-ip>:4040
+
+
+Optional: Run it in the Background (Forever)
+sudo apt install tmux
+tmux
+source venv/bin/activate
+python app/main.py
+
