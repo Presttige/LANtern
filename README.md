@@ -15,12 +15,6 @@
 
 ---
 
-## 📷 Screenshot
-
-> *(Add your screenshot here when ready)*
-
----
-
 ## 🛠️ Requirements
 
 - Python 3.7+
