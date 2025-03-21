@@ -33,3 +33,14 @@ Wake on lan from web interface
 - Linux (Ubuntu recommended) or Windows
 
 ---
+
+## 🧰 Installation (Linux)
+
+### 1. Clone the project and navigate into it
+
+```bash
+cd ~/Documents
+git clone https://github.com/yourusername/lantern.git
+cd lantern
+
+2. Create and activate a virtual environment
