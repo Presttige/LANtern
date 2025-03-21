@@ -65,7 +65,7 @@ python app/main.py
 Then press Ctrl+B, then D to detach.
 
 ---
-## Running LANtern **WITH Docker**
+## 🧰 Running LANtern **WITH Docker**
 ---
 ### 1. Make sure you have:
 ```
