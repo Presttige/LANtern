@@ -96,20 +96,9 @@ From another device on the LAN:
 
 ---
 ⚠️ Note on Docker and Magic Packet Limitations
-While LANtern can be run via Docker, I personally chose to run it directly using Python on my host system.
+While LANtern can be run via Docker, I personally chose to run it directly using Python on my host system. This is because magic packets sent from inside a Docker container originate from a different internal IP address (e.g., 172.x.x.x), which is part of Docker’s internal network. In my setup, the target device’s Wake-on-LAN functionality only accepts magic packets from the same LAN subnet (e.g., 192.168.x.x), and ignores anything from outside that range — including Docker. To ensure reliable device wakeups, I run main.py directly on my Ubuntu machine. This way, the packets are sent from my actual LAN IP, and the devices receive and respond to them correctly. If your Wake-on-LAN devices require the packet to come from the same subnet, you may encounter the same issue — in which case, running LANtern natively (without Docker) is recommended.
 
-This is because magic packets sent from inside a Docker container originate from a different internal IP address (e.g., 172.x.x.x), which is part of Docker’s internal network. In my setup, the target device’s Wake-on-LAN functionality only accepts magic packets from the same LAN subnet (e.g., 192.168.x.x), and ignores anything from outside that range — including Docker.
-
-To ensure reliable device wakeups, I run main.py directly on my Ubuntu machine. This way, the packets are sent from my actual LAN IP, and the devices receive and respond to them correctly.
-
-If your Wake-on-LAN devices require the packet to come from the same subnet, you may encounter the same issue — in which case, running LANtern natively (without Docker) is recommended.
----
----
 🛠️ Advanced: Make Docker Send Packets from the Same LAN Subnet
 If you still want to run LANtern in Docker, but need it to send packets from your LAN subnet, you can:
-
-Use Docker’s advanced macvlan network mode
-Assign your container a real IP from your LAN (like 192.168.1.250)
-Allow it to broadcast magic packets just like any other device on your network
-This requires more setup and might not be compatible with all network environments or routers — but it's a powerful option if you prefer containerized deployment.
+Use Docker’s advanced macvlan network mode. Assign your container a real IP from your LAN (like 192.168.1.250). Allow it to broadcast magic packets just like any other device on your network. This requires more setup and might not be compatible with all network environments or routers — but it's a powerful option if you prefer containerized deployment.
 ---
