@@ -1,6 +1,12 @@
 # 💡 LANtern – Wake-on-LAN Web App
 
-**LANtern** is a lightweight, user-friendly web application that allows you to power on computers or devices in your local network using **Wake-on-LAN (WoL)** magic packets. Built with Flask (Python) and SQLite, it gives you a simple interface to store device info and trigger wakeups from any browser on your network.
+LANtern is a lightweight web application that lets you power on computers and other devices in your local network using Wake-on-LAN magic packets. It provides a simple, browser-based interface to store device info (IP + MAC) and wake them with a single click.
+
+You can run LANtern:
+
+✅ Without Docker — directly on any system with Python 3 (Linux or Windows)
+🐳 With Docker — isolated and easy to deploy using Docker & Docker Compose
+Whether you prefer running it as a local Python app or inside a container, LANtern gives you flexible deployment options.
 
 ---
 
@@ -11,7 +17,7 @@
 - 🔘 Wake any device with a single click
 - 🗑️ Delete devices with a confirmation popup (poka-yoke safety)
 - 🧠 Auto-start on boot using `systemd` on Linux
-- 📦 No Docker needed – runs directly on your PC
+- 📦 Run with Docker or runs directly on your PC
 
 ---
 
@@ -25,7 +31,7 @@
 
 ---
 
-## 🧰 Installation (Linux)
+## 🧰 Installation (Linux) ** NO DOCKER ** 
 
 ### 1. Clone the project and navigate into it
 
@@ -58,3 +64,43 @@ python app/main.py
 ```
 Then press Ctrl+B, then D to detach.
 
+---
+Running LANtern with Docker
+---
+### Make sure you have:
+```
+sudo apt update
+sudo apt install docker.io docker-compose -y
+```
+### Enable and start Docker:
+```
+sudo systemctl enable docker
+sudo systemctl start docker
+```
+### 1. Clone the project and navigate into it
+```
+cd ~/Documents
+git clone https://github.com/presttige/lantern.git
+cd lantern
+docker-compose up --build -d
+```
+2. Access the app
+On the host machine:
+```http://localhost:4040```
+
+From another device on the LAN:
+```http://<your-host-ip>:4040```
+
+🧪 To View Logs
+```docker-compose logs -f```
+
+---
+⚠️ Note on Docker and Magic Packet Limitations
+While LANtern can be run via Docker, I personally chose to run it directly using Python on my host system.
+
+This is because magic packets sent from inside a Docker container originate from a different internal IP address (e.g., 172.x.x.x), which is part of Docker’s internal network. In my setup, the target device’s Wake-on-LAN functionality only accepts magic packets from the same LAN subnet (e.g., 192.168.x.x), and ignores anything from outside that range — including Docker.
+
+To ensure reliable device wakeups, I run main.py directly on my Ubuntu machine. This way, the packets are sent from my actual LAN IP, and the devices receive and respond to them correctly.
+
+If your Wake-on-LAN devices require the packet to come from the same subnet, you may encounter the same issue — in which case, running LANtern natively (without Docker) is recommended.
+---
