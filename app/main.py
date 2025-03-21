@@ -31,6 +31,18 @@ def add_device():
     db.session.commit()
     flash("Device added successfully!")
     return redirect(url_for("index"))
+    
+@app.route("/delete/<int:device_id>")
+def delete(device_id):
+    device = Device.query.get(device_id)
+    if device:
+        db.session.delete(device)
+        db.session.commit()
+        flash(f"Deleted device: {device.name}")
+    else:
+        flash("Device not found.")
+    return redirect(url_for("index"))
+
 
 @app.route("/wake/<int:device_id>")
 def wake(device_id):
