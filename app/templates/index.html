@@ -37,7 +37,11 @@
         <td>{{ device.ip_address }}</td>
         <td>{{ device.mac_address }}</td>
         <td>
-          <a href="/wake/{{ device.id }}" class="btn btn-primary">Wake</a>
+            <a href="/wake/{{ device.id }}" class="btn btn-primary">Wake</a>
+            <a href="/delete/{{ device.id }}" class="btn btn-danger"
+               onclick="return confirm('Are you sure you want to delete this device?');">
+               Delete
+            </a>
         </td>
       </tr>
       {% endfor %}
