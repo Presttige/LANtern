@@ -4,7 +4,7 @@ services:
   lantern:
     build: .
     ports:
-      - "192.168.45.89:4040:4040"
+      - "YourIP:4040"
     volumes:
       - ./:/app
     environment:
